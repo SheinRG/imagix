@@ -1,7 +1,4 @@
-import Home from query('./Home')
-import CreatePost from query('./CreatePost')
+import Home from './Home'
+import CreatePost from './CreatePost'
 
-export {
-    Home,
-    CreatePost
-}
+export { Home, CreatePost }
