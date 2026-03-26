@@ -7,6 +7,7 @@ import {getRandomPrompt} from '../utils';
 import FormField from '../components/FormField';
 import Loader from '../components/Loader';
 
+
 const CreatePost = () => {
   const navigate=useNavigate();
   const[Form,setForm]=useState({
@@ -17,7 +18,29 @@ const CreatePost = () => {
   const [generatingImg,setGeneratingImg]=useState(false);
   const [loading,setLoading]=useState(false);
 
-  const generateImage=()=>{
+  const generateImage=async()=>{
+      if(Form.prompt){
+        try{
+          setGeneratingImg(true);
+          const response = await fetch('http://localhost:8080/api/v1/imagix',{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body:JSON.stringify({prompt:Form.prompt})
+          });
+          
+          const data = await response.json();
+          setForm({...Form, photo:`data:image/png;base64,${data.photo}`});   
+        }
+        catch(error){
+         alert(error);
+        }finally{
+          setGeneratingImg(false);
+        }
+      }else{
+        alert('Please enter a prompt');
+      }
 
   }
 
@@ -25,10 +48,11 @@ const CreatePost = () => {
 
   }
  const handleChange = (e) => {
- 
+ setForm({...Form, [e.target.name]: e.target.value})
 }
  const handleSurpriseMe = () => {
-  
+  const randomPrompt = getRandomPrompt(Form.prompt);
+  setForm({...Form, prompt: randomPrompt})
 }
 
   return (
@@ -88,12 +112,24 @@ const CreatePost = () => {
           <button
           type="button"
           onClick={generateImage}
-        className='text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:brightness-110 hover:scale-105 transition-all duration-200'
-          >
+        className="text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:scale-105 transition-transform duration-300">
             {generatingImg ? 'Generating...' : 'Generate'}
 
           </button>
 
+        </div>
+
+        <div className='mt-10'>
+          <p className='mt-2 text-[#666e75] text-[14px] '>
+            Once you have created the image you want, you can share it with others in the community
+          </p>
+          <button
+          type ="submit"
+          className='mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center hover:scale-105 transition-transform duration-500'
+          >
+            {loading ? 'Sharing ...': 'Share with the community '}
+          </button>
+              
         </div>
       </form>
     </section>
