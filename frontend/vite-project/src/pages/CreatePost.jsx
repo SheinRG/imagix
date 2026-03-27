@@ -116,6 +116,9 @@ const CreatePost = () => {
             {generatingImg ? 'Generating...' : 'Generate'}
 
           </button>
+          <div>
+            
+          </div>
 
         </div>
 
