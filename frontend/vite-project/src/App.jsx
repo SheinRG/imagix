@@ -17,6 +17,9 @@ const App = () => {
   <main className='sm:pd-8 px-4 py-8 w-full bg-[#d9d9db] min-h-[calc(100vh-73px)]'>
 
   <Routes>
+    <div>
+      
+    </div>
     <Route path='/' element={<Home />} />
     <Route path='/create-post' element={<CreatePost />} />
   </Routes>

@@ -44,12 +44,12 @@ const Home = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const results = allPosts.filter(
+        const searchedResults = allPosts.filter(
           (post) =>
             post.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
             post.prompt.toLowerCase().includes(e.target.value.toLowerCase())
         );
-        setSearchedResults(results);
+        setSearchedResults(searchedResults);
       }, 500)
     );
   };
