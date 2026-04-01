@@ -1,10 +1,17 @@
 import React from 'react'
 import {download} from '../assets';
 import {downloadImage} from '../utils';
+import { motion } from 'framer-motion';
 
 const Card = ({_id, name, prompt, photo}) => {
   return (
-    <div className='rounded-xl group relative shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] card overflow-hidden transition-all duration-300'>
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true, margin: "-10px" }}
+      className='rounded-xl group relative shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] card overflow-hidden transition-all duration-300'
+    >
       <img
         className='w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110'
         src={photo}
@@ -24,7 +31,7 @@ const Card = ({_id, name, prompt, photo}) => {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

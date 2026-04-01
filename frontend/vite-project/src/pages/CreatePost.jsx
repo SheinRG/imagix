@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
@@ -75,7 +76,12 @@ const CreatePost = () => {
   };
 
   return (
-    <section className='max-w-7xl mx-auto'>
+    <motion.section 
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className='max-w-7xl mx-auto'
+    >
       <div>
         <h1 className='font-extrabold text-[40px] md:text-[52px] bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]'>Create</h1>
         <p className='mt-4 text-slate-400 text-[16px] max-w-[500px] leading-relaxed'>
@@ -148,7 +154,7 @@ const CreatePost = () => {
           </button>
         </div>
       </form>
-    </section>
+    </motion.section>
   );
 };
 
