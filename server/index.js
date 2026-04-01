@@ -10,7 +10,7 @@ import imagixRoutes from './routes/imagixRoutes.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, '.env') }); 
+dotenv.config({ path: path.join(__dirname, '.env') });
 console.log('CLOUDINARY:', process.env.CLOUDINARY_CLOUD_NAME);// ← CHANGED
 
 const app = express();
@@ -27,7 +27,8 @@ app.get('/', async (req, res) => {
 const startServer = async () => {
     try {
         connectDB(process.env.MONGODB_URL);
-        app.listen(8080, () => console.log('Server has started on port 8080 http://localhost:8080'));
+        const port = process.env.PORT || 8080;
+        app.listen(port, () => console.log(`Server has started on port ${port} http://localhost:${port}`));
     } catch (error) {
         console.log(error);
     }

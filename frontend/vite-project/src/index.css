@@ -6,9 +6,13 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-    background-color: #0f172a;
-    color: #f8fafc;
+@layer base {
+  body {
+      @apply bg-[#f9fafb] text-[#111827] transition-colors duration-300;
+  }
+  .dark body {
+      @apply bg-[#0f172a] text-[#f8fafc];
+  }
 }
 
 @media screen and (min-width: 480px) {
