@@ -14,7 +14,7 @@ router.route('/').post(async (req, res) => {
         const { prompt } = req.body;
 
         const response = await fetch(
-            "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell",
+            "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-3-medium-diffusers",
             {
                 method: "POST",
                 headers: {
