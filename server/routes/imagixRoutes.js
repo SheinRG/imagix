@@ -14,14 +14,9 @@ router.route('/').post(async (req, res) => {
         const { prompt } = req.body;
 
         const response = await fetch(
-            "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
+            `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`,
             {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ inputs: prompt }),
+                method: "GET",
             }
         );
 
