@@ -14,7 +14,7 @@ router.route('/').post(async (req, res) => {
         const { prompt } = req.body;
 
         const response = await fetch(
-            "https://api-inference.huggingface.co/models/prompthero/openjourney",
+            "https://router.huggingface.co/hf-inference/models/prompthero/openjourney",
             {
                 method: "POST",
                 headers: {
