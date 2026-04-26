@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
       const newPost = new Post({
           name,
           prompt,
-          photo: photoUrl.url,
+          photo: photoUrl.secure_url,
       });
 
       await newPost.save(); // Fix 1 — actually saves to MongoDB

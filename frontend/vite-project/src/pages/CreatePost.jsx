@@ -29,13 +29,17 @@ const CreatePost = () => {
         });
         const data = await response.json();
 
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to generate image');
+        }
+
         // Use mimeType from backend, fallback to jpeg
         const mimeType = data.mimeType || 'image/jpeg';
         setForm({ ...form, photo: `data:${mimeType};base64,${data.photo}` });
         toast.success('Image generated successfully!');
 
       } catch (error) {
-        toast.error('Failed to generate image. Please try again.');
+        toast.error(error.message || 'Failed to generate image. Please try again.');
       } finally {
         setGeneratingImg(false);
       }
@@ -56,11 +60,14 @@ const CreatePost = () => {
           body: JSON.stringify(form),
         });
 
-        await response.json();
+        const data = await response.json();
+        if (!response.ok) {
+           throw new Error(data.message || 'Failed to share prompt');
+        }
         toast.success('Shared with the community!');
         setTimeout(() => navigate('/'), 1000);
       } catch (error) {
-        toast.error('Failed to share prompt. Please try again.');
+        toast.error(error.message || 'Failed to share prompt. Please try again.');
       } finally {
         setLoading(false);
       }
